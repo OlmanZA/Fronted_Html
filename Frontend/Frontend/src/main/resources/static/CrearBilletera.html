@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Billetera</title>
+</head>
+<body>
+
+<h2>Crear Billetera</h2>
+
+<form action="http://localhost:8081/CrearBilleteraServlet" method="post">
+
+    Nombre de la Billetera:<br>
+    <input type="text" name="nombre" required><br><br>
+
+    Cédula del Usuario:<br>
+    <input type="number" name="cedula" required><br><br>
+
+    <button type="submit">Crear Billetera</button>
+</form>
+
+<br>
+<button onclick="window.location.href='billeteras.html'">Volver</button>
+
+</body>
+</html>

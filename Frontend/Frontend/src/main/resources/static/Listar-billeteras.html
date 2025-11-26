@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Billeteras</title>
+</head>
+<body>
+
+<h2>Consultar Billeteras por Usuario</h2>
+
+<form action="http://localhost:8081/ListarBilleterasServlet" method="get">
+    Cédula del Usuario:<br>
+    <input type="number" name="cedula" required><br><br>
+
+    <button type="submit">Buscar</button>
+</form>
+
+<br>
+<button onclick="location.href='Billetera.html'">Volver</button>
+
+</body>
+</html>

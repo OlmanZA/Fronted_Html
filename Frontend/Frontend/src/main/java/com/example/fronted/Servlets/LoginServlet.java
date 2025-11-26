@@ -5,7 +5,6 @@ import jakarta.servlet.annotation.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
@@ -16,39 +15,60 @@ public class LoginServlet extends HttpServlet {
         String correo = req.getParameter("correo");
         String contraseña = req.getParameter("contraseña");
 
-        String jsonInput = String.format(
-                "{\"correo\":\"%s\",\"contraseña\":\"%s\"}", correo, contraseña
+        String json = String.format(
+                "{\"correo\":\"%s\", \"contraseña\":\"%s\"}",
+                correo, contraseña
         );
 
         URL url = new URL("http://localhost:8080/Crypto/login");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/json");
-        conn.setDoOutput(true);
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setDoOutput(true);
 
-        try(OutputStream os = conn.getOutputStream()) {
-            os.write(jsonInput.getBytes());
+        try (OutputStream os = con.getOutputStream()) {
+            os.write(json.getBytes());
         }
 
         BufferedReader br = new BufferedReader(
-                new InputStreamReader(conn.getInputStream())
+                new InputStreamReader(con.getInputStream())
         );
 
-        StringBuilder response = new StringBuilder();
+        StringBuilder responseStr = new StringBuilder();
         String line;
-
         while ((line = br.readLine()) != null) {
-            response.append(line);
+            responseStr.append(line);
         }
 
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
+        // El backend devuelve "usuario": {cedula, nombre, correo...}
+        String response = responseStr.toString();
 
-        if (response.toString().contains("\"exito\":true")) {
-            out.println("<h1>Bienvenido " + correo + "</h1>");
-        } else {
-            out.println("<h1>Credenciales incorrectas</h1>");
+        // Extraer la cédula del usuario logueado
+        long cedula = extraerCedula(response);
+
+        // Guardar la cédula en la sesión
+        HttpSession session = req.getSession();
+        session.setAttribute("cedulaUsuario", cedula);
+
+        // Redirigir al menú de billeteras
+        resp.sendRedirect("Billetera.html");
+    }
+
+    private long extraerCedula(String json) {
+        json = json.replace(" ", "");
+
+        int idx = json.indexOf("\"cedula\":");
+        if (idx == -1) return -1;
+
+        String sub = json.substring(idx + 9);
+        StringBuilder num = new StringBuilder();
+
+        for (char c : sub.toCharArray()) {
+            if (Character.isDigit(c)) num.append(c);
+            else break;
         }
+        return Long.parseLong(num.toString());
     }
 }
+
