@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 @WebServlet("/CrearBilleteraServlet")
 public class CrearBilleteraServlet extends HttpServlet {
 
@@ -21,9 +22,11 @@ public class CrearBilleteraServlet extends HttpServlet {
 
         String nombre = req.getParameter("nombre");
 
+        // JSON EXACTO que tu backend espera
         String json = String.format(
                 "{\"nombre\":\"%s\", \"usuario\": { \"cedula\": %s }}",
-                nombre, cedula
+                nombre,
+                cedula
         );
 
         URL url = new URL("http://localhost:8080/Crypto/crearBilletera");
@@ -37,9 +40,17 @@ public class CrearBilleteraServlet extends HttpServlet {
             os.write(json.getBytes());
         }
 
+        int status = con.getResponseCode();
+
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
-        out.println("<h1>Billetera creada</h1>");
+
+        if (status == 201) {
+            out.println("<h1>Billetera creada con éxito</h1>");
+        } else {
+            out.println("<h1>Error al crear billetera</h1>");
+        }
+
         out.println("<a href='Billetera.html'>Volver</a>");
     }
 }
