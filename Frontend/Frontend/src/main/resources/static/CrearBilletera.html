@@ -3,24 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>Crear Billetera</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 80px;
+            background: white;
+            padding: 40px;
+            width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 80%;
+            padding: 12px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .crear-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .volver-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.03);
+        }
+    </style>
 </head>
 <body>
 
-<h2>Crear Billetera</h2>
+<div class="container">
+    <h2>Crear Billetera</h2>
 
-<form action="http://localhost:8081/CrearBilleteraServlet" method="post">
+    <form action="http://localhost:8081/CrearBilleteraServlet" method="post">
 
-    Nombre de la Billetera:<br>
-    <input type="text" name="nombre" required><br><br>
+        <label>Nombre de la Billetera:</label><br>
+        <input type="text" name="nombre" required><br>
 
-    Cédula del Usuario:<br>
-    <input type="number" name="cedula" required><br><br>
+        <label>Cédula del Usuario:</label><br>
+        <input type="number" name="cedula" required><br>
 
-    <button type="submit">Crear Billetera</button>
-</form>
+        <button type="submit" class="crear-btn">Crear Billetera</button>
+    </form>
 
-<br>
-<button onclick="window.location.href='Billetera.html'">Volver</button>
+    <button onclick="window.location.href='Billetera.html'" class="volver-btn">
+        Volver
+    </button>
+</div>
 
 </body>
 </html>

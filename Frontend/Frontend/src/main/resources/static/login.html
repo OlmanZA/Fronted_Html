@@ -1,17 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 80px;
+            background: white;
+            padding: 40px;
+            width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 80%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .login-btn { background: #2196F3; color: white; }
+        .volver-btn { background: #4CAF50; color: white; }
+        button:hover { opacity: .9; transform: scale(1.03); }
+    </style>
 </head>
 <body>
 
-<h2>Inicio de Sesión</h2>
+<div class="container">
+    <h2>Inicio de Sesión</h2>
 
-<form action="/LoginServlet" method="post">
-    Correo: <input type="email" name="correo"><br><br>
-    Contraseña: <input type="password" name="contraseña"><br><br>
-    <button type="submit">Ingresar</button>
-</form>
+    <form action="http://localhost:8081/LoginServlet" method="post">
+        <input type="email" name="correo" placeholder="Correo" required><br>
+        <input type="password" name="contraseña" placeholder="Contraseña" required><br>
+
+        <button type="submit" class="login-btn">Ingresar</button>
+    </form>
+
+    <button onclick="location.href='index.html'" class="volver-btn">Volver al inicio</button>
+</div>
 
 </body>
 </html>

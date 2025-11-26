@@ -1,18 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Billeteras</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 100px;
+            background: white;
+            padding: 40px;
+            width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        button {
+            width: 80%;
+            padding: 12px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .crear {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .listar {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .cerrar {
+            background-color: #f44336;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.03);
+        }
+    </style>
 </head>
 <body>
 
-<h1>Gestión de Billeteras</h1>
+<div class="container">
+    <h1>Gestión de Billeteras</h1>
 
-<button onclick="location.href='CrearBilletera.html'">Crear Billetera</button><br><br>
+    <button class="crear" onclick="location.href='CrearBilletera.html'">
+        Crear Billetera
+    </button>
 
-<button onclick="location.href='ListarBilleteras.html'">Listar Mis Billeteras</button><br><br>
+    <button class="listar" onclick="location.href='ListarBilleteras.html'">
+        Listar Mis Billeteras
+    </button>
 
-<button onclick="location.href='login.html'">Cerrar Sesión</button>
+    <button class="cerrar" onclick="location.href='login.html'">
+        Cerrar Sesión
+    </button>
+</div>
 
 </body>
 </html>
